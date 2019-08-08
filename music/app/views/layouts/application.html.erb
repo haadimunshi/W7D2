@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Music</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+
+  <%#we have access to #logged_in? bc we specified it as a helper method at the top of application controller%>
+  <%#for the if clause, we're changing our HTTP method to DELETE via the "hidden" text type and name of "_method" and displaying a logout button%>
+  <%#for the else clause, we're setting up links for signing in and signing up that send the user to the corresponding URL's if clicked. the links are being titled, "Sign Up!" and "Sign In"%>
+
+  <body>
+
+    <%if logged_in?%>
+      <form action="<%=session_url%>" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Log Out">
+      </form>
+    <%else%>
+      <a href="<%=new_user_url%>">Sign Up!</a>
+      <a href="<%=new_session_url%>">Sign In</a>
+    <%end%>
+    
+    <%= yield %>
+  
+  </body>
+</html>
+
+
+
+
